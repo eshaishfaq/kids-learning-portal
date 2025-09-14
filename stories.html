@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Kids Learning | Stories</title>
+  <link rel="stylesheet" href="style.css">
+  <style>
+    .story-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+      gap: 30px;
+      padding: 50px 20px;
+    }
+    .story-card {
+      background: white;
+      border-radius: 15px;
+      padding: 20px;
+      text-align: center;
+      box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+      transition: 0.3s ease;
+      cursor: pointer;
+      text-decoration: none;
+      color: #333;
+    }
+    .story-card:hover {
+      transform: scale(1.05);
+    }
+    .story-title {
+      font-size: 22px;
+      margin-bottom: 10px;
+    }
+    .story-description {
+      font-size: 16px;
+      color: #555;
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <h1>📚 Magic Tales</h1>
+    
+    <nav>
+      <div class="hamburger" id="hamburger">
+    <span></span>
+    <span></span>
+    <span></span>
+  </div>
+      <ul>
+        <li><a href="index.html">Home</a></li>
+        <li><a href="alphabets.html">Alphabets</a></li>
+        <li><a href="numbers.html">Numbers</a></li>
+        <li><a href="colors.html">Colors</a></li>
+        <li><a href="rhymes.html">Rhymes</a></li>
+        <li><a href="stories.html">Stories</a></li>
+        <li><a href="games.html">Games</a></li>
+        <li><a href="blog.html">Blog</a></li>
+      </ul>
+    </nav>
+  </header>
+
+  <section class="story-grid">
+    <a href="story-detail.html?id=1" class="story-card">
+      <div class="story-title">👑 The Brave Little Prince</div>
+      <div class="story-description">A young prince who saves his kingdom with courage...</div>
+    </a>
+    <a href="story-detail.html?id=2" class="story-card">
+      <div class="story-title">🐢 The Clever Tortoise</div>
+      <div class="story-description">A clever tortoise who outsmarts a greedy fox...</div>
+    </a>
+    <a href="story-detail.html?id=3" class="story-card">
+      <div class="story-title">🌳 The Talking Tree</div>
+      <div class="story-description">A magical tree that teaches kindness...</div>
+    </a>
+    <a href="story-detail.html?id=4" class="story-card">
+      <div class="story-title">🐇 The Quick Rabbit</div>
+      <div class="story-description">A rabbit who learns the value of patience...</div>
+    </a>
+    <a href="story-detail.html?id=5" class="story-card">
+      <div class="story-title">🐱 The Lost Kitten</div>
+      <div class="story-description">A tiny kitten finds her way home...</div>
+    </a>
+    <a href="story-detail.html?id=6" class="story-card">
+      <div class="story-title">🧚 Fairy and the Moonlight</div>
+      <div class="story-description">A fairy who brings light to the dark forest...</div>
+    </a>
+    <a href="story-detail.html?id=7" class="story-card">
+      <div class="story-title">⚔️ The Dragon Slayer</div>
+      <div class="story-description">A hero battles a fearsome dragon to save his land...</div>
+    </a>
+    <a href="story-detail.html?id=8" class="story-card">
+      <div class="story-title">🌈 Rainbow's Secret</div>
+      <div class="story-description">Discover the magic hidden inside a rainbow...</div>
+    </a>
+    <a href="story-detail.html?id=9" class="story-card">
+      <div class="story-title">🦊 Fox and the Grapes</div>
+      <div class="story-description">A classic fable about greed and desire...</div>
+    </a>
+    <a href="story-detail.html?id=10" class="story-card">
+      <div class="story-title">🐝 Busy Little Bee</div>
+      <div class="story-description">The hardworking bee teaches teamwork...</div>
+    </a>
+  </section>
+
+  <footer>
+    &copy; 2025 Kids Learning | Esha Ishfaq
+  </footer>
+   <script src="script.js"></script>
+</body>
+</html>

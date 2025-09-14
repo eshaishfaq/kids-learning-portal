@@ -1,0 +1,245 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Kids Learning | Games</title>
+  <link rel="stylesheet" href="style.css">
+  <style>
+    /* === Games Page Styling === */
+    .games-container {
+      padding: 40px 20px;
+      text-align: center;
+    }
+
+    .games-container h2 {
+      font-size: 32px;
+      margin-bottom: 30px;
+    }
+
+    /* === Memory Match Game === */
+    .memory-game {
+      display: grid;
+      grid-template-columns: repeat(4, 100px);
+      gap: 15px;
+      justify-content: center;
+      margin-bottom: 50px;
+    }
+
+    .memory-card {
+      width: 100px;
+      height: 100px;
+      background: #FFD93D;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      font-size: 30px;
+      border-radius: 10px;
+      cursor: pointer;
+      box-shadow: 0 4px 8px rgba(0,0,0,0.2);
+      transition: background 0.3s ease, transform 0.3s ease;
+    }
+
+    .memory-card.flipped {
+      background: #8AC926;
+      transform: rotateY(180deg);
+      color: white;
+      font-size: 40px;
+    }
+
+    .memory-card.matched {
+      background: #8AC926;
+      color: white;
+      pointer-events: none;
+    }
+
+    /* === Drag & Drop Puzzle === */
+    .puzzle-container {
+      display: flex;
+      justify-content: center;
+      gap: 20px;
+      margin-top: 20px;
+      flex-wrap: wrap;
+    }
+
+    .puzzle-piece, .drop-zone {
+      width: 100px;
+      height: 100px;
+      border: 2px dashed #FF595E;
+      border-radius: 10px;
+      background: #fff8e7;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 28px;
+      cursor: grab;
+    }
+
+    .drop-zone {
+      background: #FFE5B4;
+      border: 2px dashed #8AC926;
+    }
+
+    .drop-zone.filled {
+      background: #8AC926;
+      color: white;
+      font-size: 24px;
+      font-weight: bold;
+    }
+
+    /* === Success Message === */
+    .success-message {
+      font-size: 20px;
+      color: #8AC926;
+      font-weight: bold;
+      margin-top: 20px;
+      display: none;
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <h1>🎮 Play Time</h1>
+    
+    <nav>
+      <div class="hamburger" id="hamburger">
+    <span></span>
+    <span></span>
+    <span></span>
+  </div>
+      <ul>
+       <li><a href="index.html">Home</a></li>
+        <li><a href="alphabets.html">Alphabets</a></li>
+        <li><a href="numbers.html">Numbers</a></li>
+        <li><a href="colors.html">Colors</a></li>
+        <li><a href="rhymes.html">Rhymes</a></li>
+        <li><a href="stories.html">Stories</a></li>
+        <li><a href="games.html">Games</a></li>
+        <li><a href="blog.html">Blog</a></li>
+      </ul>
+    </nav>
+  </header>
+
+  <section class="games-container">
+    <h2>🧩 Fun Games</h2>
+
+    <!-- Memory Game -->
+    <div>
+      <h3>Memory Match Game</h3>
+      <div class="memory-game" id="memory-game"></div>
+      <p id="memory-status" class="success-message">🎉 You matched all the cards!</p>
+    </div>
+
+    <!-- Drag & Drop Puzzle -->
+    <div>
+      <h3>Drag & Drop Puzzle</h3>
+      <div class="puzzle-container">
+        <div class="puzzle-piece" draggable="true" id="piece1">🐱</div>
+        <div class="puzzle-piece" draggable="true" id="piece2">🐶</div>
+        <div class="puzzle-piece" draggable="true" id="piece3">🐰</div>
+
+        <div class="drop-zone" data-correct="piece1"></div>
+        <div class="drop-zone" data-correct="piece2"></div>
+        <div class="drop-zone" data-correct="piece3"></div>
+      </div>
+      <p id="puzzle-status" class="success-message">🌟 Puzzle Completed!</p>
+    </div>
+  </section>
+
+  <footer>
+    &copy; 2025 Kids Learning | Esha Ishfaq
+  </footer>
+
+  <script>
+    // === Memory Game ===
+    const memoryGameContainer = document.getElementById('memory-game');
+    const memoryStatus = document.getElementById('memory-status');
+
+    const emojis = ['🐱', '🐶', '🐰', '🐵', '🐸', '🦊'];
+    let cards = [...emojis, ...emojis].sort(() => Math.random() - 0.5);
+
+    let flippedCard = null;
+    let lockBoard = false;
+    let matchedCount = 0;
+
+    cards.forEach(emoji => {
+      const card = document.createElement('div');
+      card.classList.add('memory-card');
+      card.textContent = '❓';
+
+      card.addEventListener('click', () => {
+        if (lockBoard || card.classList.contains('flipped') || card.classList.contains('matched')) return;
+
+        card.textContent = emoji;
+        card.classList.add('flipped');
+
+        if (!flippedCard) {
+          flippedCard = card;
+        } else {
+          lockBoard = true;
+          if (flippedCard.textContent === card.textContent) {
+            flippedCard.classList.add('matched');
+            card.classList.add('matched');
+            matchedCount += 2;
+
+            if (matchedCount === cards.length) {
+              memoryStatus.style.display = 'block';
+            }
+            lockBoard = false;
+            flippedCard = null;
+          } else {
+            setTimeout(() => {
+              flippedCard.textContent = '❓';
+              card.textContent = '❓';
+              flippedCard.classList.remove('flipped');
+              card.classList.remove('flipped');
+              flippedCard = null;
+              lockBoard = false;
+            }, 800);
+          }
+        }
+      });
+
+      memoryGameContainer.appendChild(card);
+    });
+
+    // === Drag & Drop Puzzle ===
+    const puzzlePieces = document.querySelectorAll('.puzzle-piece');
+    const dropZones = document.querySelectorAll('.drop-zone');
+    const puzzleStatus = document.getElementById('puzzle-status');
+
+    let completedCount = 0;
+
+    puzzlePieces.forEach(piece => {
+      piece.addEventListener('dragstart', (e) => {
+        e.dataTransfer.setData('id', piece.id);
+      });
+    });
+
+    dropZones.forEach(zone => {
+      zone.addEventListener('dragover', (e) => {
+        e.preventDefault();
+      });
+
+      zone.addEventListener('drop', (e) => {
+        e.preventDefault();
+        const pieceId = e.dataTransfer.getData('id');
+        const piece = document.getElementById(pieceId);
+
+        if (pieceId === zone.dataset.correct) {
+          zone.innerHTML = piece.textContent;
+          zone.classList.add('filled');
+          piece.remove();
+          completedCount++;
+
+          if (completedCount === dropZones.length) {
+            puzzleStatus.style.display = 'block';
+          }
+        }
+      });
+    });
+  </script>
+
+   <script src="script.js"></script>
+</body>
+</html>

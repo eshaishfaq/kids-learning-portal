@@ -1,0 +1,213 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Kids Learning</title>
+  <link rel="stylesheet" href="style.css">
+  <style>
+    .story-detail {
+      max-width: 800px;
+      margin: 50px auto;
+      padding: 20px;
+      background: white;
+      border-radius: 15px;
+      box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+      text-align: center;
+    }
+
+    .story-detail h2 {
+      font-size: 30px;
+      margin-bottom: 15px;
+      color: #333;
+    }
+
+    .story-detail p {
+      font-size: 18px;
+      line-height: 1.8;
+      color: #555;
+      white-space: pre-line; /* Keeps line breaks */
+      text-align: left;
+      margin-bottom: 30px;
+    }
+
+    /* Back Button */
+    .back-btn {
+      display: inline-block;
+      background: linear-gradient(45deg, #FF595E, #FFCA3A, #8AC926, #1982C4, #6A4C93);
+      color: white;
+      padding: 12px 25px;
+      font-size: 18px;
+      font-weight: bold;
+      border: none;
+      border-radius: 10px;
+      text-decoration: none;
+      transition: 0.3s ease;
+      cursor: pointer;
+    }
+
+    .back-btn:hover {
+      opacity: 0.9;
+      transform: translateY(-2px);
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <h1>Kids Learning</h1>
+    
+    <nav>
+      <div class="hamburger" id="hamburger">
+    <span></span>
+    <span></span>
+    <span></span>
+  </div>
+      <ul>
+        <li><a href="index.html">Home</a></li>
+        <li><a href="stories.html" class="active">Stories</a></li>
+      </ul>
+    </nav>
+  </header>
+
+  <div class="story-detail">
+    <h2 id="story-title">Story Title</h2>
+    <p id="story-text">Loading story...</p>
+    
+    <!-- Back to Stories Button -->
+    <a href="stories.html" class="back-btn">⬅ Back to Stories</a>
+  </div>
+
+  <footer>
+    &copy; 2025 Kids Learning | Esha Ishfaq
+  </footer>
+
+  <script>
+    const params = new URLSearchParams(window.location.search);
+    const id = params.get('id');
+
+    const stories = {
+      1: {
+        title: "👑 The Brave Little Prince",
+        text: `Once upon a time, in a beautiful kingdom, there lived a young prince named Leo. 🌟
+One day, a terrible monster appeared and frightened everyone in the land. The people were scared and wanted to hide, but Prince Leo stood tall and brave. 🏰
+
+He took his sword and went into the dark forest alone. There, he found the monster trapped in pain with a thorn in its paw. Instead of fighting, Leo kindly helped the creature. 🐾
+
+The monster roared, then smiled, and promised never to hurt the kingdom again.
+From that day, Prince Leo was known as The Brave Little Prince. ❤️`
+      },
+      2: {
+        title: "🐢 The Clever Tortoise",
+        text: `In a quiet forest, there lived a clever tortoise named Timmy. 🌳
+One day, a greedy fox wanted to eat him. "You're so slow, you'll never escape me!" laughed the fox. 🦊
+
+Timmy smiled and said, "Let's race to the big tree. If you win, you can eat me." The fox agreed. 🏁
+But while the fox ran ahead, Timmy quietly took a shortcut through a secret path.
+
+When the fox reached the tree, Timmy was already waiting there! 🌟
+The fox was shocked and too embarrassed to eat Timmy, so he ran away.
+
+From that day on, everyone called Timmy The Clever Tortoise. 🐢✨`
+      },
+      3: {
+        title: "🌳 The Talking Tree",
+        text: `Long ago, there was a magical tree in the middle of a village.
+The tree could speak, but only to kind-hearted people. 🌼
+
+One day, a poor girl named Lila sat under the tree and cried because she had no food. 😢
+The tree whispered, "Do not worry, kind child. Take my golden fruit and share it with others." 🍎✨
+
+Lila did as the tree said, and soon, her village was filled with happiness and kindness.
+The tree bloomed brighter than ever, teaching everyone the power of sharing. 💛`
+      },
+      4: {
+        title: "🐇 The Quick Rabbit",
+        text: `Robby the rabbit was the fastest animal in the forest. 🏃‍♂️💨
+He loved racing everyone and always bragged about his speed.
+
+One day, a wise old turtle challenged him to a race. 🐢
+Robby laughed, thinking it would be easy. But during the race, he got distracted and took a nap. 😴
+
+The turtle kept moving slowly and steadily. When Robby woke up, it was too late — the turtle had won! 🏆
+Robby learned that speed is good, but patience and focus matter more. 🌟`
+      },
+      5: {
+        title: "🐱 The Lost Kitten",
+        text: `A tiny kitten named Mimi wandered too far from home while chasing a butterfly. 🦋
+When she looked around, she was lost! 😿
+
+She meowed loudly, but no one heard her.
+A friendly bird flew by and said, "Follow me! I’ll help you." 🐦
+
+Together, they crossed streams and meadows until Mimi finally saw her house. 🏡
+Her family hugged her tightly, and Mimi promised never to wander too far again. ❤️`
+      },
+      6: {
+        title: "🧚 Fairy and the Moonlight",
+        text: `Deep in an enchanted forest, a fairy named Luna lived among glowing flowers. 🌸
+But one night, darkness spread across the forest, and the moon disappeared. 🌑
+
+Luna bravely flew up to the sky to search for the moon. ✨
+She found it trapped in a dark cloud!
+
+Using her magic wand, Luna freed the moon and returned its light to the forest. 🌙💫
+From then on, she was known as the Guardian of Moonlight.`
+      },
+      7: {
+        title: "⚔️ The Dragon Slayer",
+        text: `Long ago, a village was terrorized by a fire-breathing dragon. 🐉🔥
+A young hero named Aric decided to fight the beast.
+
+Aric traveled through mountains, rivers, and caves until he found the dragon's lair. 🌋
+He battled bravely with his sword ⚔️ and, at last, defeated the creature.
+
+The village was saved, and Aric became a legend.
+But he chose peace over fame and taught others to be brave like him. 🌟`
+      },
+      8: {
+        title: "🌈 Rainbow's Secret",
+        text: `After a rainy day, a little girl named May followed a rainbow to see where it ended. ☔🌈
+She climbed hills and crossed streams until she reached the rainbow's base. 🌟
+
+Instead of gold, she found a magical box.
+When she opened it, tiny lights flew out and filled the sky with colors. ✨
+
+The rainbow spoke, "Happiness isn't gold, it's the beauty we share."
+May went home smiling, carrying the rainbow's secret in her heart. 💛`
+      },
+      9: {
+        title: "🦊 Fox and the Grapes",
+        text: `One hot day, a fox was very hungry.
+He saw a bunch of juicy grapes hanging high on a vine. 🍇
+
+The fox jumped and jumped but couldn’t reach them. 😩
+Finally, he gave up and said, "Those grapes are probably sour anyway."
+
+Moral of the story: It's easy to dislike what we cannot have. 🌟`
+      },
+      10: {
+        title: "🐝 Busy Little Bee",
+        text: `Bella the bee loved working in the garden. 🌻
+She collected nectar and helped flowers grow. 🌸
+
+One day, a lazy bee said, "Why work so hard? Just rest!"
+But Bella kept working with her friends. 🐝🐝
+
+When winter came, Bella's hive was full of honey, while the lazy bee had nothing. ❄️
+The lazy bee learned that teamwork and hard work bring sweet rewards. 🍯`
+      }
+    };
+
+    // Load the correct story
+    if (stories[id]) {
+      document.getElementById("story-title").textContent = stories[id].title;
+      document.getElementById("story-text").textContent = stories[id].text;
+    } else {
+      document.getElementById("story-title").textContent = "Story Not Found";
+      document.getElementById("story-text").textContent = "Sorry, we couldn't find this story.";
+    }
+  </script>
+
+   <script src="script.js"></script>
+</body>
+</html>
